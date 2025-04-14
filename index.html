@@ -10,17 +10,42 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #333;
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
+
+    .horizontal-wrapper {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .page {
+      flex: 0 0 100vw;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      box-sizing: border-box;
+    }
+
     header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
       background-color: #f3f3f3;
       padding: 1rem 2rem;
-      display: flex;
+      disple: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      top: 0;
       z-index: 1000;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05)
+    }
+    
     }
     header h1 {
       font-size: 1.5rem;
@@ -32,17 +57,13 @@
       color: #2c3e50;
       font-weight: 500;
     }
-    section {
-      padding: 4rem 2rem;
-      text-align: center;
-    }
-    .hero img,
+
     .section-img {
       width: 100%;
       max-width: 800px;
       height: auto;
       border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1)
     }
     
   </style>
@@ -60,10 +81,12 @@
     </nav>
   </header>
 
-  <section class="hero">
-    <img src="1.png" alt="Hero Section">
-
-  <section id="about">
+ <div class="horizontal-wrapper">       
+  <section class="page" id="hero">
+    <img src="1.png" alt="Hero Section" class="section-img">
+  </section>
+   
+  <section  class="page" id="about">
     <img src="2.png" alt="About Section" class="section-img">
   </section>
   
@@ -89,8 +112,6 @@
   <section id="contact">
     <img src="9.png" alt="Contact Section" class="section-img">
   </section>
-
-
-
+</div>
 </body>
 </html>
