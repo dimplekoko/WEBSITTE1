@@ -3,40 +3,61 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Professional Portfolio</title>
+  <title>Green Stone UGC Portfolio</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #333;
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
+
+    .horizontal-wrapper {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .page {
+      flex: 0 0 100vw;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      box-sizing: border-box;
+    }
+
     header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
       background-color: #f3f3f3;
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      top: 0;
       z-index: 1000;
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
+
     header h1 {
       font-size: 1.5rem;
       color: #2c3e50;
     }
+
     nav a {
       margin-left: 1rem;
       text-decoration: none;
       color: #2c3e50;
       font-weight: 500;
     }
-    section {
-      padding: 4rem 2rem;
-      text-align: center;
-    }
-    .hero img,
+
     .section-img {
       width: 100%;
       max-width: 800px;
@@ -44,53 +65,104 @@
       border-radius: 12px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
-    
+
+    .image-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .editable-text {
+      position: absolute;
+      top: 10%;
+      left: 10%;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+      background: rgba(0,0,0,0.3);
+      padding: 0.5rem;
+      border-radius: 8px;
+      cursor: text;
+      border: none;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>Professional Portfolio</h1>
+    <h1>Green Stone</h1>
     <nav>
+      <a href="#hero">Hero</a>
       <a href="#about">About</a>
-      <a href="#portfolio">Portfolio</a>
       <a href="#services">Services</a>
-      <a href="#testimonials">Testimonials<a>
-      <a href="#pricing">Rates</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#cta">CTA</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
 
-  <section class="hero">
-    <img src="1.png" alt="Hero Section">
+  <button onclick="toggleEdit()" style="position:fixed;top:80px;right:20px;z-index:1001;">Toggle Edit Mode</button>
 
-  <section id="about">
-    <img src="2.png" alt="About Section" class="section-img">
-  </section>
-  
- <section id="portfolio">
-    <img src="3.png" alt="Portfolio 1" class="section-img">
-    <img src="4.png" alt="Portfolio 2" class="section-img">
- </section>
+  <div class="horizontal-wrapper">
+    <section class="page" id="hero">
+      <div class="image-container">
+        <img src="1.png" alt="Hero Section" class="section-img">
+        <div class="editable-text" contenteditable="false">Hero Title Here</div>
+      </div>
+    </section>
 
-  <section id="services">
-    <img src="5.png" alt="Services" class="section-img">
-  </section>
+    <section class="page" id="about">
+      <div class="image-container">
+        <img src="2.png" alt="About Section" class="section-img">
+        <div class="editable-text" contenteditable="false">About Text Here</div>
+      </div>
+    </section>
 
-     <section id="testimonials">
-       <h2>What Clients Say</h2>
-       <img src="8.png" alt="Testimonials" class="section-img">
-    <section>
-      
-  <section id="pricing">
-     <img src="6.png" alt="Divider" class="section-img">
-    <img src="7.png" alt="Rates" class="section-img">
-  </section>
-  
-  <section id="contact">
-    <img src="9.png" alt="Contact Section" class="section-img">
-  </section>
+    <section class="page" id="services">
+      <div class="image-container">
+        <img src="3.png" alt="Services Section" class="section-img">
+        <div class="editable-text" contenteditable="false">Service Info Here</div>
+      </div>
+    </section>
 
+    <section class="page" id="testimonials">
+      <div class="image-container">
+        <img src="7.png" alt="Testimonials" class="section-img">
+        <div class="editable-text" contenteditable="false">Testimonial Text</div>
+      </div>
+    </section>
 
+    <section class="page" id="portfolio">
+      <img src="4.png" alt="Portfolio 1" class="section-img">
+      <img src="5.png" alt="Portfolio 2" class="section-img">
+      <img src="6.png" alt="Portfolio 3" class="section-img">
+    </section>
 
+    <section class="page" id="cta">
+      <div class="image-container">
+        <img src="8.png" alt="Call to Action" class="section-img">
+        <div class="editable-text" contenteditable="false">CTA Text</div>
+      </div>
+    </section>
+
+    <section class="page" id="contact">
+      <div class="image-container">
+        <img src="9.png" alt="Contact Section" class="section-img">
+        <div class="editable-text" contenteditable="false">Contact Info</div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    let isEditable = false;
+
+    function toggleEdit() {
+      isEditable = !isEditable;
+      document.querySelectorAll('.editable-text').forEach(el => {
+        el.contentEditable = isEditable;
+        el.style.border = isEditable ? "1px dashed white" : "none";
+      });
+    }
+  </script>
 </body>
 </html>
